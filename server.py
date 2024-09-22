@@ -8,7 +8,6 @@ Author(Learner): JeffreyHenry
 
 from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
-from EmotionDetection.emotion_detection import emotion_predictor
 
 app = Flask("Emotion Detection")
 
@@ -24,8 +23,7 @@ def sent_detector():
     Analyze the user-provided text for emotions and return the result.
     """
     text_to_detect = request.args.get('textToAnalyze')
-    response = emotion_detector(text_to_detect)
-    formatted_response = emotion_predictor(response)
+    formatted_response = emotion_detector(text_to_detect)
     if formatted_response['dominant_emotion'] is None:
         return "Invalid text! Please try again."
     return (
